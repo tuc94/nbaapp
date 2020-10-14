@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import NavBar from "./Components/NavBar"
 
 function App() {
   return (
@@ -11,7 +12,8 @@ function App() {
         <p>
          NBA Scoreboard
         </p>
-        
+
+        <NavBar listofOptions = {["Games","Rosters","Teams","Players"]} />
       </header>
     </div>
   );
