@@ -1,13 +1,6 @@
 import React from "react";
-import "./GameScoreCard.css"
+import "./GameScoreCard.css";
 
 export default function GameScoreCard() {
-
-
-
-
-
-    return(
-        <div className="StudentCard"></div>
-    )
+  return <div className="StudentCard"></div>;
 }

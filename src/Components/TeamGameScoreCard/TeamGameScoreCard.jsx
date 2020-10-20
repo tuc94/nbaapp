@@ -1,19 +1,16 @@
 import React from "react";
-import "./TeamGameScoreCard.css"
-const teamData = require("../../data/teamColors.json")
+import "./TeamGameScoreCard.css";
+const teamData = require("../../data/teamColors.json");
 
 export default function TeamGameScoreCard(teamName) {
-const team= teamName.teamName.split(" ").join("")
-const teamColor =  teamData[team]
-console.log(teamColor)
+  const team = teamName.teamName.split(" ").join("");
+  const teamColor = teamData[team];
+  console.log(teamColor);
 
-
-
-    return(
-        <div 
-        className="TeamGameStudentCard"
-        style= {{borderColor: teamColor}}
-        >
-        </div>
-    )
+  return (
+    <div
+      className="TeamGameStudentCard"
+      style={{ borderColor: teamColor }}
+    ></div>
+  );
 }

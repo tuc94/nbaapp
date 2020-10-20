@@ -1,15 +1,15 @@
 import React from "react";
 
 export default function CurrentDate() {
-    const event = new Date();
+  const event = new Date();
 
-const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  const options = { year: "numeric", month: "long", day: "numeric" };
 
-const currentDate = event.toLocaleDateString(undefined, options);
+  const currentDate = event.toLocaleDateString(undefined, options);
 
-    return(
-        <div>
-           <p>{currentDate}</p>
-        </div>
-    )
+  return (
+    <div>
+      <p>{currentDate}</p>
+    </div>
+  );
 }
