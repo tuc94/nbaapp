@@ -19,7 +19,7 @@ function App() {
         <NavBar listofOptions = {["Games","Rosters","Teams","Players"]} />
         <CurrentDate />
         <GameScoreCard />
-        <TeamGameScoreCard teamName={"Boston Celtics"}/>
+        <TeamGameScoreCard teamName={"Golden State Warriors"}/>
         
 
       </header>
