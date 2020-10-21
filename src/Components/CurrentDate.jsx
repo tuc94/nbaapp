@@ -1,7 +1,8 @@
 import React from "react";
 
-export default function CurrentDate() {
-  const event = new Date();
+export default function CurrentDate(date) {
+  console.log(date.date);
+  const event = date.date;
 
   const options = { year: "numeric", month: "long", day: "numeric" };
 
