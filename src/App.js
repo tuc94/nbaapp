@@ -10,6 +10,9 @@ const unirest = require("unirest");
 
 function App() {
   const [selectedDate, setselectedDate] = useState(new Date());
+  const [gameData, setGameData] = useState({});
+
+  console.log(gameData);
 
   useEffect(() => {
     const options = {
@@ -25,7 +28,7 @@ function App() {
     axios
       .request(options)
       .then(function (response) {
-        console.log(response.data);
+        setGameData(response.data);
       })
       .catch(function (error) {
         console.error(error);
