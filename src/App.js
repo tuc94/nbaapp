@@ -10,9 +10,7 @@ const unirest = require("unirest");
 
 function App() {
   const [selectedDate, setselectedDate] = useState(new Date());
-  const [gameData, setGameData] = useState({});
-
-  console.log(gameData);
+  const [gameData, setGameData] = useState([]);
 
   useEffect(() => {
     const options = {
@@ -28,11 +26,28 @@ function App() {
     axios
       .request(options)
       .then(function (response) {
-        setGameData(response.data);
+        setGameData(response.data.response);
       })
       .catch(function (error) {
         console.error(error);
       });
+  }, []);
+
+  gameData.map((game) => {
+    let homeTeamScore = game.scores.home.total;
+    let awayTeamScore = game.scores.away.total;
+    let homeTeamName = game.teams.home.name;
+    let awayTeamName = game.teams.away.name;
+    let hometeamlogo = game.teams.home.logo;
+    let awayteamlogo = game.teams.away.logo;
+    console.log(
+      homeTeamScore,
+      awayTeamScore,
+      homeTeamName,
+      awayTeamName,
+      hometeamlogo,
+      awayteamlogo
+    );
   });
 
   return (
@@ -49,8 +64,16 @@ function App() {
         />
         <div className="gameScoreConatiner">
           <React.Fragment>
-            <TeamGameScoreCard teamName={"New York Knicks"} />
-            <TeamGameScoreCard teamName={"Miami Heat"} />
+            <TeamGameScoreCard
+              teamName={"Indiana Pacers"}
+              teamLogo={"https://media.api-sports.io/basketball/teams/143.png"}
+              teamScore={132}
+            />
+            <TeamGameScoreCard
+              teamName={"Miami Heat"}
+              teamLogo={"https://media.api-sports.io/basketball/teams/147.png"}
+              teamScore={122}
+            />
           </React.Fragment>
         </div>
       </header>
