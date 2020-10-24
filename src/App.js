@@ -64,17 +64,30 @@ function App() {
         />
         <div className="gameScoreConatiner">
           <React.Fragment>
-            <TeamGameScoreCard
-              teamName={"Indiana Pacers"}
-              teamLogo={"https://media.api-sports.io/basketball/teams/143.png"}
-              teamScore={132}
-            />
-            <TeamGameScoreCard
-              teamName={"Miami Heat"}
-              teamLogo={"https://media.api-sports.io/basketball/teams/147.png"}
-              teamScore={122}
-            />
+            {gameData.map((game) => {
+              let homeTeamScore = game.scores.home.total;
+              let awayTeamScore = game.scores.away.total;
+              let homeTeamName = game.teams.home.name;
+              let awayTeamName = game.teams.away.name;
+              let hometeamlogo = game.teams.home.logo;
+              let awayteamlogo = game.teams.away.logo;
+              return (
+                <div>
+                  <TeamGameScoreCard
+                    teamName={homeTeamName}
+                    teamLogo={hometeamlogo}
+                    teamScore={homeTeamScore}
+                  />
+                  <TeamGameScoreCard
+                    teamName={awayTeamName}
+                    teamLogo={awayteamlogo}
+                    teamScore={awayTeamScore}
+                  />
+                </div>
+              );
+            })}
           </React.Fragment>
+          ;
         </div>
       </header>
     </div>
