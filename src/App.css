@@ -38,6 +38,9 @@
 }
 
 .gameScoreConatiner {
-  display: flex;
   flex-direction: row;
+}
+
+.ScoreContainer {
+  display: flex;
 }

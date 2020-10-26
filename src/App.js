@@ -6,7 +6,6 @@ import TeamGameScoreCard from "./Components/TeamGameScoreCard/TeamGameScoreCard"
 import SelectDate from "./Components/SelectDate/SelectDate";
 import DatePicker from "react-datepicker";
 import axios from "axios";
-const unirest = require("unirest");
 
 function App() {
   const [selectedDate, setselectedDate] = useState(new Date());
@@ -33,23 +32,6 @@ function App() {
       });
   }, []);
 
-  gameData.map((game) => {
-    let homeTeamScore = game.scores.home.total;
-    let awayTeamScore = game.scores.away.total;
-    let homeTeamName = game.teams.home.name;
-    let awayTeamName = game.teams.away.name;
-    let hometeamlogo = game.teams.home.logo;
-    let awayteamlogo = game.teams.away.logo;
-    console.log(
-      homeTeamScore,
-      awayTeamScore,
-      homeTeamName,
-      awayTeamName,
-      hometeamlogo,
-      awayteamlogo
-    );
-  });
-
   return (
     <div className="App">
       <headers>Games Rosters Teams Players</headers>
@@ -72,7 +54,7 @@ function App() {
               let hometeamlogo = game.teams.home.logo;
               let awayteamlogo = game.teams.away.logo;
               return (
-                <div>
+                <div className="ScoreContainer">
                   <TeamGameScoreCard
                     teamName={homeTeamName}
                     teamLogo={hometeamlogo}
