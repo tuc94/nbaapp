@@ -14,14 +14,12 @@ function App() {
   //This doesn't work but want it as a frame of refrence
   let apiDate = new Date(selectedDate);
   apiDate.setDate(apiDate.getDate() - 1);
-  console.log(apiDate);
-  console.log(
-    apiDate.getFullYear(),
-    "-",
-    apiDate.getMonth(),
-    "-",
-    apiDate.getDate()
-  );
+  let date =
+    apiDate.getFullYear() +
+    "-" +
+    (apiDate.getMonth() + 1) +
+    "-" +
+    apiDate.getDate();
 
   useEffect(() => {
     const options = {
@@ -33,6 +31,7 @@ function App() {
         "x-rapidapi-key": "d319461f72msh8114849e8fc830ep1e2bd3jsn3384176a0ffc",
       },
     };
+    console.log(options);
 
     axios
       .request(options)
