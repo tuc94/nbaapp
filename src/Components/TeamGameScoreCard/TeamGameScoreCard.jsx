@@ -7,7 +7,6 @@ export default function TeamGameScoreCard(props) {
   const teamColor = teamData[team];
   const teamScore = props.teamScore;
   const teamLogo = props.teamLogo;
-  console.log(teamColor);
 
   return (
     <div className="TeamGameStudentCard" style={{ borderColor: teamColor }}>

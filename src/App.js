@@ -11,6 +11,18 @@ function App() {
   const [selectedDate, setselectedDate] = useState(new Date());
   const [gameData, setGameData] = useState([]);
 
+  //This doesn't work but want it as a frame of refrence
+  let apiDate = new Date(selectedDate);
+  apiDate.setDate(apiDate.getDate() - 1);
+  console.log(apiDate);
+  console.log(
+    apiDate.getFullYear(),
+    "-",
+    apiDate.getMonth(),
+    "-",
+    apiDate.getDate()
+  );
+
   useEffect(() => {
     const options = {
       method: "GET",
