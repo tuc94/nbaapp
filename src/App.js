@@ -10,6 +10,7 @@ import axios from "axios";
 function App() {
   const [selectedDate, setselectedDate] = useState(new Date());
   const [gameData, setGameData] = useState([]);
+  const [selectedGameDate, setSellectedGameDate] = useState("11-26-2020");
 
   //This doesn't work but want it as a frame of refrence
   let apiDate = new Date(selectedDate);
@@ -20,12 +21,23 @@ function App() {
     (apiDate.getMonth() + 1) +
     "-" +
     apiDate.getDate();
+  //setSellectedGameDate(date);
 
-  useEffect(() => {
+  const getPosts = async (selectedDate) => {
+    //This doesn't work but want it as a frame of refrence
+    let apiDate = new Date(selectedDate);
+    apiDate.setDate(apiDate.getDate() - 1);
+    let date =
+      apiDate.getFullYear() +
+      "-" +
+      (apiDate.getMonth() + 1) +
+      "-" +
+      apiDate.getDate();
+    //setSellectedGameDate(date);
     const options = {
       method: "GET",
       url: "https://rapidapi.p.rapidapi.com/games",
-      params: { season: "2019-2020", league: "12", date: "2019-11-26" },
+      params: { season: "2019-2020", league: "12", date: date },
       headers: {
         "x-rapidapi-host": "api-basketball.p.rapidapi.com",
         "x-rapidapi-key": "d319461f72msh8114849e8fc830ep1e2bd3jsn3384176a0ffc",
@@ -33,7 +45,7 @@ function App() {
     };
     console.log(options);
 
-    axios
+    await axios
       .request(options)
       .then(function (response) {
         setGameData(response.data.response);
@@ -41,7 +53,11 @@ function App() {
       .catch(function (error) {
         console.error(error);
       });
-  }, []);
+  };
+
+  useEffect(() => {
+    getPosts(selectedDate);
+  }, [selectedDate]);
 
   return (
     <div className="App">
