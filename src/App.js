@@ -10,7 +10,6 @@ import axios from "axios";
 function App() {
   const [selectedDate, setselectedDate] = useState(new Date());
   const [gameData, setGameData] = useState([]);
-  const [selectedGameDate, setSellectedGameDate] = useState("11-26-2020");
 
   //This doesn't work but want it as a frame of refrence
   let apiDate = new Date(selectedDate);
@@ -21,7 +20,6 @@ function App() {
     (apiDate.getMonth() + 1) +
     "-" +
     apiDate.getDate();
-  //setSellectedGameDate(date);
 
   const getPosts = async (selectedDate) => {
     //This doesn't work but want it as a frame of refrence
@@ -30,10 +28,9 @@ function App() {
     let date =
       apiDate.getFullYear() +
       "-" +
-      (apiDate.getMonth() + 1) +
+      ("0" + (apiDate.getMonth() + 1)).slice(-2) +
       "-" +
-      apiDate.getDate();
-    //setSellectedGameDate(date);
+      ("0" + apiDate.getDate()).slice(-2);
     const options = {
       method: "GET",
       url: "https://rapidapi.p.rapidapi.com/games",
