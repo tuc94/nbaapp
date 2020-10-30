@@ -31,16 +31,21 @@ function App() {
       ("0" + (apiDate.getMonth() + 1)).slice(-2) +
       "-" +
       ("0" + apiDate.getDate()).slice(-2);
+    let season = "2019-2020";
+    if (9 <= apiDate.getMonth() && 1 <= apiDate.getDate()) {
+      season = apiDate.getFullYear() + "-" + (apiDate.getFullYear() + 1);
+    } else {
+      season = apiDate.getFullYear() - 1 + "-" + apiDate.getFullYear();
+    }
     const options = {
       method: "GET",
       url: "https://rapidapi.p.rapidapi.com/games",
-      params: { season: "2019-2020", league: "12", date: date },
+      params: { season: season, league: "12", date: date },
       headers: {
         "x-rapidapi-host": "api-basketball.p.rapidapi.com",
         "x-rapidapi-key": "d319461f72msh8114849e8fc830ep1e2bd3jsn3384176a0ffc",
       },
     };
-    console.log(options);
 
     await axios
       .request(options)
