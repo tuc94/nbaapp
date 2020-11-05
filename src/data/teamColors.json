@@ -1,32 +1,122 @@
 {
-  "AtlantaHawks": "#E03A3E",
-  "BostonCeltics": "#007A33",
-  "BrooklynNets": "#000000",
-  "CharlotteHornets": "#1D1160",
-  "ChicagoBulls": "#CE1141",
-  "ClevelandCavaliers": "#860038",
-  "DallasMavericks": "#00538C",
-  "DenverNuggets": "#0E2240",
-  "DetroitPistons": "#C8102E",
-  "GoldenStateWarriors": "#1D428A",
-  "HoustonRockets": "#CE1141",
-  "IndianaPacers": "#002D62",
-  "LosAngelesClippers": "#C8102E",
-  "LosAngelesLakers": "#552583",
-  "MemphisGrizzlies": "#5D76A9",
-  "MiamiHeat": "#98002E",
-  "MilwaukeeBucks": "#00471B",
-  "MinnesotaTimberwolves": "#0C2340",
-  "NewOrleansPelicans": "#0C2340",
-  "NewYorkKnicks": "#006BB6",
-  "OklahomaCityThunder": "#007AC1",
-  "OrlandoMagic": "#0077C0",
-  "Philadelphia76ers": "#006BB6",
-  "PhoenixSuns": "#1D1160",
-  "PortlandTrailBlazers": "#E03A3E",
-  "SacramentoKings": "#5A2D81",
-  "SanAntonioSpurs": "#C4CED4",
-  "TorontoRaptors": "#CE1141",
-  "UtahJazz": "#002B5C",
-  "WashingtonWizards": "#002B5C"
+  "AtlantaHawks": {
+    "Color": "#E03A3E",
+    "Logo": "https://content.sportslogos.net/logos/6/220/full/9168_atlanta_hawks-primary-2016.png"
+  },
+  "BostonCeltics": {
+    "Color": "#007A33",
+    "Logo": "https://content.sportslogos.net/logos/6/213/full/slhg02hbef3j1ov4lsnwyol5o.png"
+  },
+  "BrooklynNets": {
+    "Color": "#000000",
+    "Logo": "https://content.sportslogos.net/logos/6/3786/full/137_brooklyn-nets-primary-2013.png"
+  },
+  "CharlotteHornets": {
+    "Color": "#1D1160",
+    "Logo": "https://content.sportslogos.net/logos/6/5120/full/1926_charlotte__hornets_-primary-2015.png"
+  },
+  "ChicagoBulls": {
+    "Color": "#CE1141",
+    "Logo": "https://content.sportslogos.net/logos/6/221/full/hj3gmh82w9hffmeh3fjm5h874.png"
+  },
+  "ClevelandCavaliers": {
+    "Color": "#860038",
+    "Logo": "https://content.sportslogos.net/logos/6/222/full/6921_cleveland_cavaliers-primary-2018.png"
+  },
+  "DallasMavericks": {
+    "Color": "#00538C",
+    "Logo": "https://content.sportslogos.net/logos/6/228/full/3463_dallas_mavericks-primary-2018.png"
+  },
+  "DenverNuggets": {
+    "Color": "#0E2240",
+    "Logo": "https://content.sportslogos.net/logos/6/229/full/8926_denver_nuggets-primary-2019.png"
+  },
+  "DetroitPistons": {
+    "Color": "#C8102E",
+    "Logo": "https://content.sportslogos.net/logos/6/223/full/2164_detroit_pistons-primary-2018.png"
+  },
+  "GoldenStateWarriors": {
+    "Color": "#1D428A",
+    "Logo": "https://content.sportslogos.net/logos/6/235/full/3152_golden_state_warriors-primary-2020.png"
+  },
+  "HoustonRockets": {
+    "Color": "#CE1141",
+    "Logo": "https://content.sportslogos.net/logos/6/230/full/6830_houston_rockets-primary-2020.png"
+  },
+  "IndianaPacers": {
+    "Color": "#002D62",
+    "Logo": "https://content.sportslogos.net/logos/6/224/full/4812_indiana_pacers-primary-2018.png"
+  },
+  "LosAngelesClippers": {
+    "Color": "#C8102E",
+    "Logo": "https://content.sportslogos.net/logos/6/236/full/5462_los_angeles_clippers-primary-2016.png"
+  },
+  "LosAngelesLakers": {
+    "Color": "#552583",
+    "Logo": "https://content.sportslogos.net/logos/6/237/full/uig7aiht8jnpl1szbi57zzlsh.png"
+  },
+  "MemphisGrizzlies": {
+    "Color": "#5D76A9",
+    "Logo": "https://content.sportslogos.net/logos/6/231/full/4373_memphis_grizzlies-primary-2019.png"
+  },
+  "MiamiHeat": {
+    "Color": "#98002E",
+    "Logo": "https://content.sportslogos.net/logos/6/214/full/burm5gh2wvjti3xhei5h16k8e.gif"
+  },
+  "MilwaukeeBucks": {
+    "Color": "#00471B",
+    "Logo": "https://content.sportslogos.net/logos/6/225/full/8275_milwaukee_bucks-primary-2016.png"
+  },
+  "MinnesotaTimberwolves": {
+    "Color": "#0C2340",
+    "Logo": "https://content.sportslogos.net/logos/6/232/full/9669_minnesota_timberwolves-primary-2018.png"
+  },
+  "NewOrleansPelicans": {
+    "Color": "#0C2340",
+    "NewOrleansPelicans": "https://content.sportslogos.net/logos/6/4962/full/2681_new_orleans_pelicans-primary-2014.png"
+  },
+  "NewYorkKnicks": {
+    "Color": "#006BB6",
+    "Logo": "https://content.sportslogos.net/logos/6/216/full/2nn48xofg0hms8k326cqdmuis.gif"
+  },
+  "OklahomaCityThunder": {
+    "Color": "#007AC1",
+    "Logo": "https://content.sportslogos.net/logos/6/2687/full/khmovcnezy06c3nm05ccn0oj2.png"
+  },
+  "OrlandoMagic": {
+    "Color": "#0077C0",
+    "Logo": "https://content.sportslogos.net/logos/6/217/full/wd9ic7qafgfb0yxs7tem7n5g4.gif"
+  },
+  "Philadelphia76ers": {
+    "Color": "#006BB6",
+    "Logo": "https://content.sportslogos.net/logos/6/218/full/7034_philadelphia_76ers-primary-2016.png"
+  },
+  "PhoenixSuns": {
+    "Color": "#1D1160",
+    "Logo": "https://content.sportslogos.net/logos/6/238/full/4370_phoenix_suns-primary-2014.png"
+  },
+  "PortlandTrailBlazers": {
+    "Color": "#E03A3E",
+    "Logo": "https://content.sportslogos.net/logos/6/239/full/9725_portland_trail_blazers-primary-2018.png"
+  },
+  "SacramentoKings": {
+    "Color": "#5A2D81",
+    "Logo": "https://content.sportslogos.net/logos/6/240/full/4043_sacramento_kings-primary-2017.png"
+  },
+  "SanAntonioSpurs": {
+    "Color": "#C4CED4",
+    "Logo": "https://content.sportslogos.net/logos/6/233/full/2547_san_antonio_spurs-primary-2018.png"
+  },
+  "TorontoRaptors": {
+    "Color": "#CE1141",
+    "Logo": "https://content.sportslogos.net/logos/6/227/full/4578_toronto_raptors-primary-2016.png"
+  },
+  "UtahJazz": {
+    "Color": "#002B5C",
+    "Logo": "https://content.sportslogos.net/logos/6/234/full/6749_utah_jazz-primary-2017.png"
+  },
+  "WashingtonWizards": {
+    "Color": "#002B5C",
+    "Logo": "https://content.sportslogos.net/logos/6/219/full/5671_washington_wizards-primary-2016.png"
+  }
 }
