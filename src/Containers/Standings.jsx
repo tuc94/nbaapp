@@ -6,6 +6,7 @@ import SelectDate from "../Components/SelectDate/SelectDate";
 import DatePicker from "react-datepicker";
 import axios from "axios";
 import { isCompositeComponent } from "react-dom/test-utils";
+import StandingsTable from "../Components/StandingsTable/StandingsTable";
 
 function Standings() {
   const [season, setSeason] = useState("2019-2020");
@@ -37,40 +38,30 @@ function Standings() {
     getPosts();
   }, []);
 
-  let west = standingData.filter((standing) => {
+  const west = standingData.filter((standing) => {
     return standing.group.name === "Western Conference";
   });
-  let east = standingData.filter((standing) => {
+  const east = standingData.filter((standing) => {
     return standing.group.name === "Eastern Conference";
   });
-  let atlantic = standingData.filter((standing) => {
+  const atlantic = standingData.filter((standing) => {
     return standing.group.name === "Atlantic";
   });
-  let southEast = standingData.filter((standing) => {
+  const southEast = standingData.filter((standing) => {
     return standing.group.name === "Southeast";
   });
-  let central = standingData.filter((standing) => {
+  const central = standingData.filter((standing) => {
     return standing.group.name === "Central";
   });
-  let northWest = standingData.filter((standing) => {
+  const northWest = standingData.filter((standing) => {
     return standing.group.name === "Northwest";
   });
-  let pacfific = standingData.filter((standing) => {
+  const pacfific = standingData.filter((standing) => {
     return standing.group.name === "Pacific";
   });
-  let southWest = standingData.filter((standing) => {
+  const southWest = standingData.filter((standing) => {
     return standing.group.name === "Southwest";
   });
-
-  console.log(
-    atlantic,
-    southEast,
-    central,
-    northWest,
-    pacfific,
-    southEast,
-    southWest
-  );
 
   return (
     <div>
@@ -111,6 +102,7 @@ function Standings() {
           </tr>
         </React.Fragment>
       </div>
+      <StandingsTable standings={west} />
     </div>
   );
 }
