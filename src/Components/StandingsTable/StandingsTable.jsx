@@ -13,13 +13,21 @@ export default function StandingsTable(props) {
       <React.Fragment>
         <tr>
           <th>Seed</th>
-          <th>Teams</th>
+          <th>Team</th>
           <th>Wins</th>
           <th>Loses</th>
           <th>Win Percentages</th>
         </tr>
         {standingData.map((teamStanding) => {
-          return <td>{teamStanding.position}</td>;
+          return (
+            <tr>
+              <td>{teamStanding.position}</td>
+              <td>{teamStanding.team.name}</td>
+              <td>{teamStanding.games.win.total}</td>
+              <td>{teamStanding.games.lose.total}</td>
+              <td>{teamStanding.games.win.percentage}</td>
+            </tr>
+          );
         })}
       </React.Fragment>
     </div>

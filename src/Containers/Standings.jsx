@@ -65,44 +65,14 @@ function Standings() {
 
   return (
     <div>
-      <div>
-        <p>Western Confrence</p>
-        <React.Fragment>
-          <tr>
-            <th>Seed</th>
-            <th>Teams</th>
-            <th>Wins</th>
-            <th>Loses</th>
-            <th>Win Percentages</th>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Lakers</td>
-            <td>56</td>
-            <td>12</td>
-            <td>0.750</td>
-          </tr>
-        </React.Fragment>
-      </div>
-      <div>
-        <React.Fragment>
-          <tr>
-            <th>Seed</th>
-            <th>Teams</th>
-            <th>Wins</th>
-            <th>Loses</th>
-            <th>Win Percentages</th>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Lakers</td>
-            <td>56</td>
-            <td>12</td>
-            <td>0.750</td>
-          </tr>
-        </React.Fragment>
-      </div>
       <StandingsTable standings={west} />
+      <StandingsTable standings={east} />
+      <StandingsTable standings={atlantic} />
+      <StandingsTable standings={southEast} />
+      <StandingsTable standings={central} />
+      <StandingsTable standings={northWest} />
+      <StandingsTable standings={pacfific} />
+      <StandingsTable standings={southWest} />
     </div>
   );
 }
