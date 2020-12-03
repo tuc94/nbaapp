@@ -7,6 +7,12 @@ import DatePicker from "react-datepicker";
 import axios from "axios";
 import { isCompositeComponent } from "react-dom/test-utils";
 import StandingsTable from "../Components/StandingsTable/StandingsTable";
+import FormatAlignLeftIcon from "@material-ui/icons/FormatAlignLeft";
+import FormatAlignCenterIcon from "@material-ui/icons/FormatAlignCenter";
+import FormatAlignRightIcon from "@material-ui/icons/FormatAlignRight";
+import FormatAlignJustifyIcon from "@material-ui/icons/FormatAlignJustify";
+import ToggleButton from "@material-ui/lab/ToggleButton";
+import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 
 function Standings() {
   const [season, setSeason] = useState("2019-2020");
@@ -38,6 +44,12 @@ function Standings() {
     getPosts();
   }, []);
 
+  const [alignment, setAlignment] = React.useState("left");
+
+  const handleAlignment = (event, newAlignment) => {
+    setAlignment(newAlignment);
+  };
+
   const west = standingData.filter((standing) => {
     return standing.group.name === "Western Conference";
   });
@@ -65,6 +77,25 @@ function Standings() {
 
   return (
     <div>
+      <ToggleButtonGroup
+        value={alignment}
+        exclusive
+        onChange={handleAlignment}
+        aria-label="text alignment"
+      >
+        <ToggleButton value="left" aria-label="left aligned">
+          <FormatAlignLeftIcon />
+        </ToggleButton>
+        <ToggleButton value="center" aria-label="centered">
+          <FormatAlignCenterIcon />
+        </ToggleButton>
+        <ToggleButton value="right" aria-label="right aligned">
+          <FormatAlignRightIcon />
+        </ToggleButton>
+        <ToggleButton value="justify" aria-label="justified" disabled>
+          <FormatAlignJustifyIcon />
+        </ToggleButton>
+      </ToggleButtonGroup>
       <StandingsTable standings={west} />
       <StandingsTable standings={east} />
       <StandingsTable standings={atlantic} />
