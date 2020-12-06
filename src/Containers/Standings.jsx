@@ -7,16 +7,13 @@ import DatePicker from "react-datepicker";
 import axios from "axios";
 import { isCompositeComponent } from "react-dom/test-utils";
 import StandingsTable from "../Components/StandingsTable/StandingsTable";
-import FormatAlignLeftIcon from "@material-ui/icons/FormatAlignLeft";
-import FormatAlignCenterIcon from "@material-ui/icons/FormatAlignCenter";
-import FormatAlignRightIcon from "@material-ui/icons/FormatAlignRight";
-import FormatAlignJustifyIcon from "@material-ui/icons/FormatAlignJustify";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 
 function Standings() {
   const [season, setSeason] = useState("2019-2020");
   const [standingData, setStandingData] = useState([]);
+  const [toggleSelection, setToggleSelection] = useState("Confrence");
 
   const getPosts = async () => {
     //This doesn't work but want it as a frame of refrence
@@ -46,8 +43,8 @@ function Standings() {
 
   const [alignment, setAlignment] = React.useState("left");
 
-  const handleAlignment = (event, newAlignment) => {
-    setAlignment(newAlignment);
+  const handleAlignment = (e, newToggle) => {
+    setToggleSelection(newToggle);
   };
 
   const west = standingData.filter((standing) => {
@@ -78,32 +75,35 @@ function Standings() {
   return (
     <div>
       <ToggleButtonGroup
-        value={alignment}
+        value={toggleSelection}
         exclusive
         onChange={handleAlignment}
         aria-label="text alignment"
       >
-        <ToggleButton value="left" aria-label="left aligned">
-          <FormatAlignLeftIcon />
+        <ToggleButton value="Confrence" aria-label="left aligned">
+          Confrence
         </ToggleButton>
-        <ToggleButton value="center" aria-label="centered">
-          <FormatAlignCenterIcon />
-        </ToggleButton>
-        <ToggleButton value="right" aria-label="right aligned">
-          <FormatAlignRightIcon />
-        </ToggleButton>
-        <ToggleButton value="justify" aria-label="justified" disabled>
-          <FormatAlignJustifyIcon />
+        <ToggleButton value="Divsions" aria-label="centered">
+          Divisions
         </ToggleButton>
       </ToggleButtonGroup>
-      <StandingsTable standings={west} />
-      <StandingsTable standings={east} />
-      <StandingsTable standings={atlantic} />
-      <StandingsTable standings={southEast} />
-      <StandingsTable standings={central} />
-      <StandingsTable standings={northWest} />
-      <StandingsTable standings={pacfific} />
-      <StandingsTable standings={southWest} />
+      {toggleSelection === "Confrence" ? (
+        <div>
+          <StandingsTable standings={west} />
+          <StandingsTable standings={east} />
+        </div>
+      ) : (
+        <div>
+          <p>Eastern Confrence</p>
+          <StandingsTable standings={atlantic} />
+          <StandingsTable standings={southEast} />
+          <StandingsTable standings={central} />
+          <p>Western Confrence</p>
+          <StandingsTable standings={northWest} />
+          <StandingsTable standings={pacfific} />
+          <StandingsTable standings={southWest} />
+        </div>
+      )}
     </div>
   );
 }
