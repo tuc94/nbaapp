@@ -9,6 +9,7 @@ import axios from "axios";
 //Save this for later
 import HomePage from "./Containers/HomePage";
 import Standings from "./Containers/Standings";
+import SelectMe from "./Components/Select/Select";
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
       <header className="App-header">
         <p>NBA Scoreboard</p>
         <NavBar listofOptions={["Games", "Rosters", "Teams", "Players"]} />
-        <Standings />
+        <SelectMe />
       </header>
     </div>
   );
