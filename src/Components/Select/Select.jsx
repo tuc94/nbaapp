@@ -42,7 +42,6 @@ function SelectMe() {
           <MenuItem value={30}>Thirty</MenuItem>
         </Select>
       </FormControl>
-      <div>{age}</div>
     </div>
   );
 }
