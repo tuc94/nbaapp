@@ -18,7 +18,6 @@ function App() {
       <header className="App-header">
         <p>NBA Scoreboard</p>
         <NavBar listofOptions={["Games", "Rosters", "Teams", "Players"]} />
-        <SelectMe />
       </header>
     </div>
   );
