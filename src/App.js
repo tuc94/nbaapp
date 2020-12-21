@@ -10,6 +10,7 @@ import axios from "axios";
 import HomePage from "./Containers/HomePage";
 import Standings from "./Containers/Standings";
 import SelectMe from "./Components/Select/Select";
+import PlayerSearch from "./Components/PlayerSearch/PlayerSearch";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <header className="App-header">
         <p>NBA Scoreboard</p>
         <NavBar listofOptions={["Games", "Rosters", "Teams", "Players"]} />
+        <PlayerSearch />
       </header>
     </div>
   );

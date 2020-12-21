@@ -1,17 +1,43 @@
-import React, { useState } from "react";
-import DatePicker from "react-datepicker";
+import React, { useState, useEffect } from "react";
+import "./PlayerSearch.css";
+import axios from "axios";
 
-import "react-datepicker/dist/react-datepicker.css";
+export default function PlayerSearch() {
+  const [playerSearch, setPlayerSearch] = useState("");
 
-// CSS Modules, react-datepicker-cssmodules.css
-// import 'react-datepicker/dist/react-datepicker-cssmodules.css';
+  const getPosts = async () => {
+    //This doesn't work but want it as a frame of refrence
+    const options = {
+      method: "GET",
+      url: "https://api-basketball.p.rapidapi.com/standings",
+      params: { league: "12", season: "2019-2020" },
+      headers: {
+        "x-rapidapi-key": "d319461f72msh8114849e8fc830ep1e2bd3jsn3384176a0ffc",
+        "x-rapidapi-host": "api-basketball.p.rapidapi.com",
+      },
+    };
 
-export default function SelectDate() {
-  const [selectedDate, setselectedDate] = useState(new Date());
+    axios
+      .request(options)
+      .then(function (response) {})
+      .catch(function (error) {
+        console.error(error);
+      });
+  };
+
+  useEffect(() => {
+    getPosts();
+  }, []);
   return (
-    <DatePicker
-      selected={selectedDate}
-      onChange={(selectedDate) => setselectedDate(selectedDate)}
-    />
+    <div>
+      <input
+        type="text"
+        id="player name"
+        className="bar"
+        value={playerSearch}
+        placeholder="NBA Player"
+        onChange={(e) => setPlayerSearch(e.target.value)}
+      />
+    </div>
   );
 }
