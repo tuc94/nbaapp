@@ -1,33 +1,44 @@
 import React, { useState, useEffect } from "react";
 import "./PlayerSearch.css";
 import axios from "axios";
+import { Table } from "@material-ui/core";
+import Radio from "@material-ui/core/Radio";
+import Button from "@material-ui/core/Button";
 
 export default function PlayerSearch() {
   const [playerSearch, setPlayerSearch] = useState("");
+  const [playerList, setPlayerList] = useState([]);
+  const [searchList, setSearchList] = useState([]);
 
-  const getPosts = async () => {
+  const getPlayer = async () => {
     //This doesn't work but want it as a frame of refrence
     const options = {
       method: "GET",
-      url: "https://api-basketball.p.rapidapi.com/standings",
-      params: { league: "12", season: "2019-2020" },
+      url: "https://balldontlie.io/api/v1/players",
+      params: { search: playerSearch },
       headers: {
-        "x-rapidapi-key": "d319461f72msh8114849e8fc830ep1e2bd3jsn3384176a0ffc",
-        "x-rapidapi-host": "api-basketball.p.rapidapi.com",
+        Accept: "application/json",
+        "Access-Control-Allow-Origin": "*",
       },
     };
 
     axios
       .request(options)
-      .then(function (response) {})
+      .then(function (response) {
+        setPlayerList(response.data.data);
+      })
       .catch(function (error) {
         console.error(error);
       });
   };
 
   useEffect(() => {
-    getPosts();
-  }, []);
+    if (playerSearch === "") {
+    } else {
+      getPlayer();
+    }
+  }, [searchList]);
+
   return (
     <div>
       <input
@@ -38,6 +49,33 @@ export default function PlayerSearch() {
         placeholder="NBA Player"
         onChange={(e) => setPlayerSearch(e.target.value)}
       />
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={(e) => setSearchList(playerSearch)}
+      >
+        Search
+      </Button>
+      <Table>
+        <tr>
+          <th></th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Team Name</th>
+        </tr>
+        {playerList.map((player) => {
+          return (
+            <tr>
+              <td>
+                <Radio />
+              </td>
+              <td>{player.first_name} </td>
+              <td>{player.last_name} </td>
+              <td>{player.team.full_name} </td>
+            </tr>
+          );
+        })}
+      </Table>
     </div>
   );
 }
