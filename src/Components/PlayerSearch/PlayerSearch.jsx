@@ -9,6 +9,8 @@ export default function PlayerSearch() {
   const [playerSearch, setPlayerSearch] = useState("");
   const [playerList, setPlayerList] = useState([]);
   const [searchList, setSearchList] = useState([]);
+  const [selectedPlayer, setSelectedPlayer] = useState([]);
+  let count = 0;
 
   const getPlayer = async () => {
     //This doesn't work but want it as a frame of refrence
@@ -39,8 +41,13 @@ export default function PlayerSearch() {
     }
   }, [searchList]);
 
+  const handleChange = (event) => {
+    setSelectedPlayer(event.target.value);
+  };
+
   return (
     <div>
+      <div></div>
       <input
         type="text"
         id="player name"
@@ -64,10 +71,16 @@ export default function PlayerSearch() {
           <th>Team Name</th>
         </tr>
         {playerList.map((player) => {
+          count += 1;
+          console.log(count);
           return (
             <tr>
               <td>
-                <Radio />
+                <Radio
+                  onChange={handleChange}
+                  value={player.id}
+                  checked={selectedPlayer === player.id}
+                />
               </td>
               <td>{player.first_name} </td>
               <td>{player.last_name} </td>
