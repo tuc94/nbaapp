@@ -9,8 +9,7 @@ export default function PlayerSearch() {
   const [playerSearch, setPlayerSearch] = useState("");
   const [playerList, setPlayerList] = useState([]);
   const [searchList, setSearchList] = useState([]);
-  const [selectedPlayer, setSelectedPlayer] = useState([]);
-  let count = 0;
+  const [selectedPlayer, setSelectedPlayer] = useState("");
 
   const getPlayer = async () => {
     //This doesn't work but want it as a frame of refrence
@@ -71,15 +70,15 @@ export default function PlayerSearch() {
           <th>Team Name</th>
         </tr>
         {playerList.map((player) => {
-          count += 1;
-          console.log(count);
           return (
             <tr>
               <td>
                 <Radio
+                  checked={selectedPlayer == player.id}
                   onChange={handleChange}
                   value={player.id}
-                  checked={selectedPlayer === player.id}
+                  name="radio-button-demo"
+                  inputProps={{ "aria-label": "A" }}
                 />
               </td>
               <td>{player.first_name} </td>
