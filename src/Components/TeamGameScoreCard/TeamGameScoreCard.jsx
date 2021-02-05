@@ -10,7 +10,11 @@ export default function TeamGameScoreCard(props) {
 
   return (
     <div className="TeamGameStudentCard" style={{ borderColor: teamColor }}>
-      <img src={teamLogo} alt=""></img>
+      <div className="TeamLogoContainer">
+        <div className="TeamLogo">
+          <img src={teamLogo} alt=""></img>
+        </div>
+      </div>
       <p>{teamScore}</p>
     </div>
   );

@@ -4,3 +4,16 @@
   padding: 50px;
   margin: 20px;
 }
+
+.TeamLogoContainer {
+  display: flex;
+}
+
+.TeamLogo {
+  flex: 0.75;
+}
+
+img {
+  height: 100px;
+  padding-left: 128px;
+}

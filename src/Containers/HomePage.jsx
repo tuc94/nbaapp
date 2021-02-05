@@ -21,7 +21,7 @@ function HomePage() {
   const getPosts = async (selectedDate) => {
     //This doesn't work but want it as a frame of refrence
     let apiDate = new Date(selectedDate);
-    apiDate.setDate(apiDate.getDate() - 1);
+    apiDate.setDate(apiDate.getDate() + 1);
     let date =
       apiDate.getFullYear() +
       "-" +
