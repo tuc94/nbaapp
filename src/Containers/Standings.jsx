@@ -9,6 +9,7 @@ import { isCompositeComponent } from "react-dom/test-utils";
 import StandingsTable from "../Components/StandingsTable/StandingsTable";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
+import "./Standings.css";
 
 function Standings() {
   const [season, setSeason] = useState("2019-2020");
@@ -88,7 +89,7 @@ function Standings() {
         </ToggleButton>
       </ToggleButtonGroup>
       {toggleSelection === "Confrence" ? (
-        <div>
+        <div className="confrenceStandingsContainer">
           <StandingsTable standings={west} />
           <StandingsTable standings={east} />
         </div>

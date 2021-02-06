@@ -9,7 +9,7 @@ import axios from "axios";
 //Save this for later
 import HomePage from "./Containers/HomePage";
 import Standings from "./Containers/Standings";
-import SelectMe from "./Components/Select/Select";
+import SelectMe from "./Components/Select/SelectMe";
 import PlayerSearch from "./Components/PlayerSearch/PlayerSearch";
 import PlayerStatPage from "./Components/PlayerStatPage/PlayerStatPage";
 

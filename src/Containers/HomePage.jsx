@@ -90,7 +90,6 @@ function HomePage() {
             );
           })}
         </React.Fragment>
-        ;
       </div>
     </div>
   );
