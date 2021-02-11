@@ -10,6 +10,8 @@ import StandingsTable from "../Components/StandingsTable/StandingsTable";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import "./Standings.css";
+import SelectMe from "../Components/Select/SelectMe";
+const seasonData = require("../data/seasonData.json");
 
 function Standings() {
   const [season, setSeason] = useState("2019-2020");
@@ -88,6 +90,9 @@ function Standings() {
           Divisions
         </ToggleButton>
       </ToggleButtonGroup>
+      <div>
+        <SelectMe data={seasonData} />
+      </div>
       {toggleSelection === "Confrence" ? (
         <div className="confrenceStandingsContainer">
           <StandingsTable standings={west} />

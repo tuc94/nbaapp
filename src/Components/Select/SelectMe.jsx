@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SelectMe() {
+function SelectMe(data) {
   const classes = useStyles();
   const [age, setAge] = React.useState("");
 
@@ -37,9 +37,9 @@ function SelectMe() {
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          {data[0].map((option) => {
+            console.log(option);
+          })}
         </Select>
       </FormControl>
     </div>
