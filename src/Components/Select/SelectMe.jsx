@@ -5,6 +5,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import { Label } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -16,29 +17,30 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SelectMe(data) {
+function SelectMe(props) {
+  const data = props.data;
+  const label = props.label;
+  const state = props.state;
+  const setState = props.setState;
+
   const classes = useStyles();
-  const [age, setAge] = React.useState("");
 
   const handleChange = (event) => {
-    setAge(event.target.value);
+    setState(event.target.value);
   };
   return (
     <div>
       <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-outlined-label">Age</InputLabel>
+        <InputLabel id="demo-simple-select-outlined-label">{label}</InputLabel>
         <Select
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
-          value={age}
+          value={state}
           onChange={handleChange}
-          label="Age"
+          label={label}
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          {data[0].map((option) => {
-            console.log(option);
+          {data.map((option) => {
+            return <MenuItem value={option.value}>{option.title}</MenuItem>;
           })}
         </Select>
       </FormControl>

@@ -11,10 +11,12 @@ import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import "./Standings.css";
 import SelectMe from "../Components/Select/SelectMe";
-const seasonData = require("../data/seasonData.json");
+import { ControlCameraSharp } from "@material-ui/icons";
+let seasonData = require("../data/seasonData.json");
+seasonData = seasonData.data.reverse();
 
 function Standings() {
-  const [season, setSeason] = useState("2019-2020");
+  const [season, setSeason] = useState("2020-2021");
   const [standingData, setStandingData] = useState([]);
   const [toggleSelection, setToggleSelection] = useState("Confrence");
 
@@ -23,7 +25,7 @@ function Standings() {
     const options = {
       method: "GET",
       url: "https://api-basketball.p.rapidapi.com/standings",
-      params: { league: "12", season: "2019-2020" },
+      params: { league: "12", season: season },
       headers: {
         "x-rapidapi-key": "d319461f72msh8114849e8fc830ep1e2bd3jsn3384176a0ffc",
         "x-rapidapi-host": "api-basketball.p.rapidapi.com",
@@ -42,7 +44,7 @@ function Standings() {
 
   useEffect(() => {
     getPosts();
-  }, []);
+  }, [season]);
 
   const [alignment, setAlignment] = React.useState("left");
 
@@ -91,7 +93,12 @@ function Standings() {
         </ToggleButton>
       </ToggleButtonGroup>
       <div>
-        <SelectMe data={seasonData} />
+        <SelectMe
+          data={seasonData}
+          label={"Season"}
+          state={season}
+          setState={setSeason}
+        />
       </div>
       {toggleSelection === "Confrence" ? (
         <div className="confrenceStandingsContainer">
