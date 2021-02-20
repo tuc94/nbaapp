@@ -3,16 +3,24 @@ import axios from "axios";
 import { Table } from "@material-ui/core";
 import Radio from "@material-ui/core/Radio";
 import Button from "@material-ui/core/Button";
+import SelectMe from "../Select/SelectMe";
+let seasonData = require("../../data/playerStatSeasonData.json");
+seasonData = seasonData.data.reverse();
 
-export default function PlayerStatPage() {
+export default function PlayerStatPage(props) {
   const [playerStats, setPlayerStats] = useState([]);
+  const [season, setSeason] = useState("2020");
+  const playerID = props.playerId;
+  const state = props.state;
+  const setState = props.setState;
+  console.log(playerID);
 
   const getPlayer = async () => {
     //This doesn't work but want it as a frame of refrence
     const options = {
       method: "GET",
       url: "https://www.balldontlie.io/api/v1/season_averages",
-      params: { season: 2018, "player_ids[]": 237 },
+      params: { season: season, "player_ids[]": playerID },
       headers: {
         Accept: "application/json",
         "Access-Control-Allow-Origin": "*",
@@ -31,10 +39,24 @@ export default function PlayerStatPage() {
 
   useEffect(() => {
     getPlayer();
-  }, []);
+  }, [playerID, season]);
 
   return (
     <div>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={(e) => setState(false)}
+      >
+        Back
+      </Button>
+      <SelectMe
+        data={seasonData}
+        label={"Season"}
+        state={season}
+        setState={setSeason}
+      />
+      {season}
       <Table>
         <tr>
           <th>Ast</th>

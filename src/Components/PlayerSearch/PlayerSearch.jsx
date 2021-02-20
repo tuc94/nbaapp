@@ -4,12 +4,18 @@ import axios from "axios";
 import { Table } from "@material-ui/core";
 import Radio from "@material-ui/core/Radio";
 import Button from "@material-ui/core/Button";
+import Icon from "@material-ui/core/Icon";
+import PlayerStatPage from "../PlayerStatPage/PlayerStatPage";
+import SelectMe from "../Select/SelectMe";
+let seasonData = require("../../data/seasonData.json");
+seasonData = seasonData.data.reverse();
 
 export default function PlayerSearch() {
   const [playerSearch, setPlayerSearch] = useState("");
   const [playerList, setPlayerList] = useState([]);
   const [searchList, setSearchList] = useState([]);
   const [selectedPlayer, setSelectedPlayer] = useState("");
+  const [showPlayerStats, setShowPlayerStats] = useState(false);
 
   const getPlayer = async () => {
     //This doesn't work but want it as a frame of refrence
@@ -44,50 +50,72 @@ export default function PlayerSearch() {
     setSelectedPlayer(event.target.value);
   };
 
+  const switchToPlayerScreen = () => {
+    setShowPlayerStats(true);
+  };
+
   return (
     <div>
-      <div></div>
-      <input
-        type="text"
-        id="player name"
-        className="bar"
-        value={playerSearch}
-        placeholder="NBA Player"
-        onChange={(e) => setPlayerSearch(e.target.value)}
-      />
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={(e) => setSearchList(playerSearch)}
-      >
-        Search
-      </Button>
-      <Table>
-        <tr>
-          <th></th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Team Name</th>
-        </tr>
-        {playerList.map((player) => {
-          return (
+      {showPlayerStats ? (
+        <div>
+          <PlayerStatPage
+            playerId={selectedPlayer}
+            state={showPlayerStats}
+            setState={setShowPlayerStats}
+          />
+        </div>
+      ) : (
+        <div>
+          <input
+            type="text"
+            id="player name"
+            className="bar"
+            value={playerSearch}
+            placeholder="NBA Player"
+            onChange={(e) => setPlayerSearch(e.target.value)}
+          />
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={(e) => setSearchList(playerSearch)}
+          >
+            Search
+          </Button>
+          <Table>
             <tr>
-              <td>
-                <Radio
-                  checked={selectedPlayer == player.id}
-                  onChange={handleChange}
-                  value={player.id}
-                  name="radio-button-demo"
-                  inputProps={{ "aria-label": "A" }}
-                />
-              </td>
-              <td>{player.first_name} </td>
-              <td>{player.last_name} </td>
-              <td>{player.team.full_name} </td>
+              <th></th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Team Name</th>
             </tr>
-          );
-        })}
-      </Table>
+            {playerList.map((player) => {
+              return (
+                <tr>
+                  <td>
+                    <Radio
+                      checked={selectedPlayer == player.id}
+                      onChange={handleChange}
+                      value={player.id}
+                      name="radio-button-demo"
+                      inputProps={{ "aria-label": "A" }}
+                    />
+                  </td>
+                  <td>{player.first_name} </td>
+                  <td>{player.last_name} </td>
+                  <td>{player.team.full_name} </td>
+                </tr>
+              );
+            })}
+          </Table>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={switchToPlayerScreen}
+          >
+            Select
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
