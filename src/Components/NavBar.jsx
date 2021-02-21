@@ -4,25 +4,24 @@ import HomePage from "../Containers/HomePage";
 import Standings from "../Containers/Standings";
 import PlayerSerach from "../Components/PlayerSearch/PlayerSearch";
 import PlayerStatPage from "../Components/PlayerStatPage/PlayerStatPage";
+import "./NavBar.css";
 
 export default function NavBar(listofOptions) {
   let props = listofOptions;
   return (
     <Router>
       <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Games</Link>
-            </li>
-            <li>
-              <Link to="/Standings">Standings</Link>
-            </li>
-            <li>
-              <Link to="/Players">Players</Link>
-            </li>
-          </ul>
-        </nav>
+        <div className="container">
+          <div>
+            <Link to="/">Games</Link>
+          </div>
+          <div>
+            <Link to="/Standings">Standings</Link>
+          </div>
+          <div>
+            <Link to="/Players">Players</Link>
+          </div>
+        </div>
 
         {/* A <Switch> looks through its children <Route>s and
           renders the first one that matches the current URL. */}

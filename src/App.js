@@ -18,7 +18,7 @@ function App() {
     <div className="App">
       <headers>Games Rosters Teams Players</headers>
       <header className="App-header">
-        <p>NBA Scoreboard</p>
+        <p>Tuc's NBA Scoreboard</p>
         <NavBar listofOptions={["Games", "Rosters", "Teams", "Players"]} />
       </header>
     </div>
