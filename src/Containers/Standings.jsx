@@ -12,7 +12,7 @@ import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import "./Standings.css";
 import SelectMe from "../Components/Select/SelectMe";
 import { ControlCameraSharp } from "@material-ui/icons";
-let seasonData = require("../data/seasonData.json");
+let seasonData = require("../data/currentseasonData.json");
 seasonData = seasonData.data.reverse();
 
 function Standings() {
