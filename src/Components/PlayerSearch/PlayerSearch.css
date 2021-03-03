@@ -1,4 +1,27 @@
 .bar {
   width: 1053px;
   height: 53px;
+  margin-right: 5px;
+  margin-top: 20px;
+}
+
+.searchButton {
+  width: 42px;
+}
+
+.searchButton {
+  width: 42px;
+}
+
+.selectButton {
+  width: 200px;
+}
+
+.selectButtonConatiner {
+  margin-top: 15px;
+  padding-left: 1062px;
+}
+
+.selectText {
+  font-size: large;
 }

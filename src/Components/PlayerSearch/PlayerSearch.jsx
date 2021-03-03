@@ -7,6 +7,8 @@ import Button from "@material-ui/core/Button";
 import Icon from "@material-ui/core/Icon";
 import PlayerStatPage from "../PlayerStatPage/PlayerStatPage";
 import SelectMe from "../Select/SelectMe";
+import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
+import "./PlayerSearch.css";
 let seasonData = require("../../data/seasonData.json");
 seasonData = seasonData.data.reverse();
 
@@ -74,13 +76,16 @@ export default function PlayerSearch() {
             placeholder="NBA Player"
             onChange={(e) => setPlayerSearch(e.target.value)}
           />
+
           <Button
             variant="contained"
             color="primary"
             onClick={(e) => setSearchList(playerSearch)}
+            className="searchButton"
           >
-            Search
+            <SearchOutlinedIcon />
           </Button>
+
           <Table>
             <tr>
               <th></th>
@@ -107,13 +112,16 @@ export default function PlayerSearch() {
               );
             })}
           </Table>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={switchToPlayerScreen}
-          >
-            Select
-          </Button>
+          <div className="selectButtonConatiner">
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={switchToPlayerScreen}
+              className="selectButton"
+            >
+              <div className="selectText"> Select </div>
+            </Button>
+          </div>
         </div>
       )}
     </div>
