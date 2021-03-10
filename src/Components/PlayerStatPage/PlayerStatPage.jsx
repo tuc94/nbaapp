@@ -4,6 +4,7 @@ import { Table } from "@material-ui/core";
 import Radio from "@material-ui/core/Radio";
 import Button from "@material-ui/core/Button";
 import SelectMe from "../Select/SelectMe";
+import "./PlayerStatPage.css";
 let seasonData = require("../../data/playerStatSeasonData.json");
 seasonData = seasonData.data.reverse();
 
@@ -13,7 +14,6 @@ export default function PlayerStatPage(props) {
   const playerID = props.playerId;
   const state = props.state;
   const setState = props.setState;
-  console.log(playerID);
 
   const getPlayer = async () => {
     //This doesn't work but want it as a frame of refrence
@@ -43,13 +43,17 @@ export default function PlayerStatPage(props) {
 
   return (
     <div>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={(e) => setState(false)}
-      >
-        Back
-      </Button>
+      <div className="backButton">
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={(e) => setState(false)}
+          className="backButtonSize"
+        >
+          <div className="backButtonStyle">Back </div>
+        </Button>
+      </div>
+      <div></div>
       <SelectMe
         data={seasonData}
         label={"Season"}
