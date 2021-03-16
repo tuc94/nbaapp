@@ -4,6 +4,7 @@ import { Table } from "@material-ui/core";
 import Radio from "@material-ui/core/Radio";
 import Button from "@material-ui/core/Button";
 import SelectMe from "../Select/SelectMe";
+import Tooltip from "@material-ui/core/Tooltip";
 import "./PlayerStatPage.css";
 let seasonData = require("../../data/playerStatSeasonData.json");
 seasonData = seasonData.data.reverse();
@@ -63,20 +64,20 @@ export default function PlayerStatPage(props) {
       {season}
       <Table>
         <tr>
-          <th>Ast</th>
-          <th>Blk</th>
-          <th>Dreb</th>
-          <th>fg3_pct</th>
-          <th>fg3a</th>
-          <th>fg3m</th>
-          <th>ft_pct</th>
-          <th>games_played</th>
-          <th>min</th>
-          <th>oreb</th>
-          <th>pts</th>
-          <th>reb</th>
-          <th>stl</th>
-          <th>turnover</th>
+          <th>AST</th>
+          <th>BLK</th>
+          <th>DRB</th>
+          <th>3P%</th>
+          <th>3PA</th>
+          <th>3P</th>
+          <th>FT%</th>
+          <th>G</th>
+          <th>MP</th>
+          <th>ORB</th>
+          <th>PTS</th>
+          <th>TRB</th>
+          <th>STL</th>
+          <th>TOV</th>
         </tr>
         {playerStats.map((player) => {
           return (
