@@ -23,7 +23,7 @@ export default function PlayerSearch() {
     //This doesn't work but want it as a frame of refrence
     const options = {
       method: "GET",
-      url: "https://balldontlie.io/api/v1/players",
+      url: "/players",
       params: { search: playerSearch },
       headers: {
         Accept: "application/json",

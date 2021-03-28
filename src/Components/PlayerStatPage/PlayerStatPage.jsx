@@ -20,7 +20,7 @@ export default function PlayerStatPage(props) {
     //This doesn't work but want it as a frame of refrence
     const options = {
       method: "GET",
-      url: "https://www.balldontlie.io/api/v1/season_averages",
+      url: "season_averages",
       params: { season: season, "player_ids[]": playerID },
       headers: {
         Accept: "application/json",
