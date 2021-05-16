@@ -84,12 +84,13 @@ function Standings() {
         exclusive
         onChange={handleAlignment}
         aria-label="text alignment"
+        className="toggleButtonContainer"
       >
         <ToggleButton value="Confrence" aria-label="left aligned">
-          Confrence
+          <div className="toggleButtonFont">Confrence</div>
         </ToggleButton>
         <ToggleButton value="Divsions" aria-label="centered">
-          Divisions
+          <div className="toggleButtonFont">Divisions </div>
         </ToggleButton>
       </ToggleButtonGroup>
       <div>
@@ -98,6 +99,7 @@ function Standings() {
           label={"Season"}
           state={season}
           setState={setSeason}
+          className="SelectMe"
         />
       </div>
       {toggleSelection === "Confrence" ? (

@@ -44,3 +44,14 @@
 .ScoreContainer {
   display: flex;
 }
+
+.TitleTextBox {
+  font-size: xxx-large;
+  display: grid;
+  grid-template-columns: 214px 465px;
+  padding-right: 63px;
+}
+
+.TitleText {
+  margin-top: -26px;
+}

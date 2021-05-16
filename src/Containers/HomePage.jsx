@@ -47,6 +47,7 @@ function HomePage() {
     await axios
       .request(options)
       .then(function (response) {
+        console.log(season, date);
         setGameData(response.data.response);
       })
       .catch(function (error) {

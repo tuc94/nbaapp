@@ -16,9 +16,13 @@ import PlayerStatPage from "./Components/PlayerStatPage/PlayerStatPage";
 function App() {
   return (
     <div className="App">
-      <headers>Games Rosters Teams Players</headers>
       <header className="App-header">
-        <p>Tuc's NBA Scoreboard</p>
+        <div className="TitleTextBox">
+          <img src="nba.png"></img>
+          <div className="TitleText">
+            <p>Tuc's NBA Scoreboard</p>
+          </div>
+        </div>
         <NavBar listofOptions={["Games", "Rosters", "Teams", "Players"]} />
       </header>
     </div>

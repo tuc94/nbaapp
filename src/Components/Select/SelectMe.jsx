@@ -6,6 +6,7 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { Label } from "@material-ui/icons";
+import "./SelectMe.css";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -30,14 +31,17 @@ function SelectMe(props) {
   };
   return (
     <div>
-      <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-outlined-label">{label}</InputLabel>
+      <FormControl variant="outlined" className="TextOutline">
+        <InputLabel id="demo-simple-select-outlined-label" className="Text">
+          {label}
+        </InputLabel>
         <Select
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
           value={state}
           onChange={handleChange}
           label={label}
+          className="TextOutline"
         >
           {data.map((option) => {
             return <MenuItem value={option.value}>{option.title}</MenuItem>;

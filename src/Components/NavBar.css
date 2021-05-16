@@ -1,5 +1,7 @@
 .container {
-  display: grid;
-  grid-template-columns: 100px 190px 100px;
-  margin-left: 421px;
+  display: inline-grid;
+  grid-template-rows: 100px 100px 100px;
+  grid-template-columns: 100px 100px 100px;
+  grid-gap: 3px;
+  justify-items: center;
 }
