@@ -8,20 +8,10 @@ function HomePage() {
   const [selectedDate, setselectedDate] = useState(new Date());
   const [gameData, setGameData] = useState([]);
 
-  //This doesn't work but want it as a frame of refrence
-  let apiDate = new Date(selectedDate);
-  apiDate.setDate(apiDate.getDate() - 1);
-  let date =
-    apiDate.getFullYear() +
-    "-" +
-    (apiDate.getMonth() + 1) +
-    "-" +
-    apiDate.getDate();
-
   const getPosts = async (selectedDate) => {
     //This doesn't work but want it as a frame of refrence
     let apiDate = new Date(selectedDate);
-    apiDate.setDate(apiDate.getDate() + 1);
+    apiDate.setDate(apiDate.getDate());
     let date =
       apiDate.getFullYear() +
       "-" +
@@ -36,19 +26,22 @@ function HomePage() {
     }
     const options = {
       method: "GET",
-      url: "https://rapidapi.p.rapidapi.com/games",
-      params: { season: season, league: "12", date: date },
+      url: "games",
+      params: {
+        season: season,
+        start_date: date,
+        end_date: date,
+      },
       headers: {
-        "x-rapidapi-host": "api-basketball.p.rapidapi.com",
-        "x-rapidapi-key": "d319461f72msh8114849e8fc830ep1e2bd3jsn3384176a0ffc",
+        Accept: "application/json",
+        "Access-Control-Allow-Origin": "*",
       },
     };
 
     await axios
       .request(options)
       .then(function (response) {
-        console.log(season, date);
-        setGameData(response.data.response);
+        setGameData(response.data.data);
       })
       .catch(function (error) {
         console.error(error);
@@ -69,22 +62,19 @@ function HomePage() {
       <div className="gameScoreConatiner">
         <React.Fragment>
           {gameData.map((game) => {
-            let homeTeamScore = game.scores.home.total;
-            let awayTeamScore = game.scores.away.total;
-            let homeTeamName = game.teams.home.name;
-            let awayTeamName = game.teams.away.name;
-            let hometeamlogo = game.teams.home.logo;
-            let awayteamlogo = game.teams.away.logo;
+            console.log(game);
+            let homeTeamScore = game.home_team_score;
+            let awayTeamScore = game.visitor_team_score;
+            let homeTeamName = game.home_team.full_name;
+            let awayTeamName = game.visitor_team.full_name;
             return (
               <div className="ScoreContainer">
                 <TeamGameScoreCard
                   teamName={homeTeamName}
-                  teamLogo={hometeamlogo}
                   teamScore={homeTeamScore}
                 />
                 <TeamGameScoreCard
                   teamName={awayTeamName}
-                  teamLogo={awayteamlogo}
                   teamScore={awayTeamScore}
                 />
               </div>
