@@ -1,7 +1,7 @@
 .container {
   display: inline-grid;
-  grid-template-rows: 100px 100px 100px;
-  grid-template-columns: 100px 100px 100px;
+  grid-template-rows: 74px;
+  grid-template-columns: 150px 150px 150px;
   grid-gap: 3px;
   justify-items: center;
 }

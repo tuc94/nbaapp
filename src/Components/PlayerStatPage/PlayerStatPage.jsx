@@ -12,6 +12,7 @@ seasonData = seasonData.data.reverse();
 export default function PlayerStatPage(props) {
   const [playerStats, setPlayerStats] = useState([]);
   const [season, setSeason] = useState("2020");
+  const [hidePlayersStats, setHidePlayersStats] = useState(false);
   const playerID = props.playerId;
   const state = props.state;
   const setState = props.setState;
@@ -31,7 +32,12 @@ export default function PlayerStatPage(props) {
     axios
       .request(options)
       .then(function (response) {
-        setPlayerStats(response.data.data);
+        if (response.data.data.length === 0) {
+          setHidePlayersStats(true);
+        } else if (response.data.data.length !== 0) {
+          setHidePlayersStats(false);
+          setPlayerStats(response.data.data);
+        }
       })
       .catch(function (error) {
         console.error(error);
@@ -62,44 +68,48 @@ export default function PlayerStatPage(props) {
         setState={setSeason}
       />
       {season}
-      <Table>
-        <tr>
-          <th>AST</th>
-          <th>BLK</th>
-          <th>DRB</th>
-          <th>3P%</th>
-          <th>3PA</th>
-          <th>3P</th>
-          <th>FT%</th>
-          <th>G</th>
-          <th>MP</th>
-          <th>ORB</th>
-          <th>PTS</th>
-          <th>TRB</th>
-          <th>STL</th>
-          <th>TOV</th>
-        </tr>
-        {playerStats.map((player) => {
-          return (
-            <tr>
-              <td>{player.ast}</td>
-              <td>{player.blk} </td>
-              <td>{player.dreb} </td>
-              <td>{player.fg3_pct} </td>
-              <td>{player.fg3a}</td>
-              <td>{player.fg3m} </td>
-              <td>{player.ft_pct} </td>
-              <td>{player.games_played} </td>
-              <td>{player.min}</td>
-              <td>{player.oreb} </td>
-              <td>{player.pts} </td>
-              <td>{player.reb} </td>
-              <td>{player.stl}</td>
-              <td>{player.turnover} </td>
-            </tr>
-          );
-        })}
-      </Table>
+      {hidePlayersStats ? (
+        <div> Search another player </div>
+      ) : (
+        <Table>
+          <tr>
+            <th>AST</th>
+            <th>BLK</th>
+            <th>DRB</th>
+            <th>3P%</th>
+            <th>3PA</th>
+            <th>3P</th>
+            <th>FT%</th>
+            <th>G</th>
+            <th>MP</th>
+            <th>ORB</th>
+            <th>PTS</th>
+            <th>TRB</th>
+            <th>STL</th>
+            <th>TOV</th>
+          </tr>
+          {playerStats.map((player) => {
+            return (
+              <tr>
+                <td>{player.ast}</td>
+                <td>{player.blk} </td>
+                <td>{player.dreb} </td>
+                <td>{player.fg3_pct} </td>
+                <td>{player.fg3a}</td>
+                <td>{player.fg3m} </td>
+                <td>{player.ft_pct} </td>
+                <td>{player.games_played} </td>
+                <td>{player.min}</td>
+                <td>{player.oreb} </td>
+                <td>{player.pts} </td>
+                <td>{player.reb} </td>
+                <td>{player.stl}</td>
+                <td>{player.turnover} </td>
+              </tr>
+            );
+          })}
+        </Table>
+      )}
     </div>
   );
 }

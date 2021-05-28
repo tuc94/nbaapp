@@ -18,6 +18,7 @@ export default function PlayerSearch() {
   const [searchList, setSearchList] = useState([]);
   const [selectedPlayer, setSelectedPlayer] = useState("");
   const [showPlayerStats, setShowPlayerStats] = useState(false);
+  const [hidePlayerSearch, setHidePlayerSearch] = useState(false);
 
   const getPlayer = async () => {
     //This doesn't work but want it as a frame of refrence
@@ -34,7 +35,12 @@ export default function PlayerSearch() {
     axios
       .request(options)
       .then(function (response) {
-        setPlayerList(response.data.data);
+        if (response.data.data.length === 0) {
+          setHidePlayerSearch(true);
+        } else if (response.data.data.length !== 0) {
+          setHidePlayerSearch(false);
+          setPlayerList(response.data.data);
+        }
       })
       .catch(function (error) {
         console.error(error);
@@ -85,33 +91,37 @@ export default function PlayerSearch() {
           >
             <SearchOutlinedIcon />
           </Button>
+          {hidePlayerSearch ? (
+            <div> Search another player </div>
+          ) : (
+            <Table>
+              <tr>
+                <th></th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Team Name</th>
+              </tr>
 
-          <Table>
-            <tr>
-              <th></th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Team Name</th>
-            </tr>
-            {playerList.map((player) => {
-              return (
-                <tr>
-                  <td>
-                    <Radio
-                      checked={selectedPlayer == player.id}
-                      onChange={handleChange}
-                      value={player.id}
-                      name="radio-button-demo"
-                      inputProps={{ "aria-label": "A" }}
-                    />
-                  </td>
-                  <td>{player.first_name} </td>
-                  <td>{player.last_name} </td>
-                  <td>{player.team.full_name} </td>
-                </tr>
-              );
-            })}
-          </Table>
+              {playerList.map((player) => {
+                return (
+                  <tr>
+                    <td>
+                      <Radio
+                        checked={selectedPlayer == player.id}
+                        onChange={handleChange}
+                        value={player.id}
+                        name="radio-button-demo"
+                        inputProps={{ "aria-label": "A" }}
+                      />
+                    </td>
+                    <td>{player.first_name} </td>
+                    <td>{player.last_name} </td>
+                    <td>{player.team.full_name} </td>
+                  </tr>
+                );
+              })}
+            </Table>
+          )}
           <div className="selectButtonConatiner">
             <Button
               variant="contained"
