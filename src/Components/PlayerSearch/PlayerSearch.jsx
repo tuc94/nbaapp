@@ -92,7 +92,7 @@ export default function PlayerSearch() {
             <SearchOutlinedIcon />
           </Button>
           {hidePlayerSearch ? (
-            <div> Search another player </div>
+            <div className="errorMessage "> Search Another Player </div>
           ) : (
             <Table>
               <tr>

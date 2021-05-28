@@ -12,3 +12,8 @@
 .backButtonStyle {
   font-size: x-large;
 }
+
+.errorMessage {
+  padding-top: 40px;
+  font-size: xxx-large;
+}

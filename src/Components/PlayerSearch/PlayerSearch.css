@@ -25,3 +25,8 @@
 .selectText {
   font-size: large;
 }
+
+.errorMessage {
+  padding-top: 40px;
+  font-size: xxx-large;
+}

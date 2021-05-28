@@ -69,7 +69,7 @@ export default function PlayerStatPage(props) {
       />
       {season}
       {hidePlayersStats ? (
-        <div> Search another player </div>
+        <div className="errorMessage"> Search another player </div>
       ) : (
         <Table>
           <tr>
