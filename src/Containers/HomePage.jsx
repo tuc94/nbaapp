@@ -9,21 +9,24 @@ function HomePage() {
   const [gameData, setGameData] = useState([]);
 
   const getPosts = async (selectedDate) => {
-    //This doesn't work but want it as a frame of refrence
     let apiDate = new Date(selectedDate);
-    apiDate.setDate(apiDate.getDate());
     let date =
       apiDate.getFullYear() +
       "-" +
       ("0" + (apiDate.getMonth() + 1)).slice(-2) +
       "-" +
       ("0" + apiDate.getDate()).slice(-2);
-    let season = "2019-2020";
-    if (9 <= apiDate.getMonth() && 1 <= apiDate.getDate()) {
-      season = apiDate.getFullYear() + "-" + (apiDate.getFullYear() + 1);
+  
+    let season;
+    // NBA season generally starts in October (month 9) and ends in April of the next year
+    if (apiDate.getMonth() >= 9) {
+      // If the month is October (9) or later, the season starts in the current year and ends in the next year
+      season = `${apiDate.getFullYear()}-${apiDate.getFullYear() + 1}`;
     } else {
-      season = apiDate.getFullYear() - 1 + "-" + apiDate.getFullYear();
+      // If the month is before October, the season started in the previous year and ends in the current year
+      season = `${apiDate.getFullYear() - 1}-${apiDate.getFullYear()}`;
     }
+  
     const options = {
       method: "GET",
       url: "games",
@@ -35,9 +38,10 @@ function HomePage() {
       headers: {
         Accept: "application/json",
         "Access-Control-Allow-Origin": "*",
+        "Authorization": `5453c273-add7-4732-b45a-e5163250cfaa`,
       },
     };
-
+  
     await axios
       .request(options)
       .then(function (response) {
@@ -47,6 +51,7 @@ function HomePage() {
         console.error(error);
       });
   };
+  
 
   useEffect(() => {
     getPosts(selectedDate);
