@@ -4,9 +4,9 @@ const teamData = require("../../data/teamColors.json");
 
 export default function TeamGameScoreCard(props) {
   const team = props.teamName.split(" ").join("");
-  const teamColor = teamData[team].Color;
+  const teamColor = teamData?.[team]?.Color;
   const teamScore = props.teamScore;
-  const teamLogo = teamData[team].Logo;
+  const teamLogo = teamData[team]?.Logo;
 
   return (
     <div className="TeamGameStudentCard" style={{ borderColor: teamColor }}>

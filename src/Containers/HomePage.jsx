@@ -24,6 +24,7 @@ function HomePage() {
         season: "2024-2025", // Update the season as needed
         league: "12",        // Update the league as needed
         date: formattedDate,
+        timezone: "America/New_York"
       },
       headers: {
         "x-rapidapi-host": "api-basketball.p.rapidapi.com",
