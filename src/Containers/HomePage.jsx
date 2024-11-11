@@ -5,56 +5,42 @@ import DatePicker from "react-datepicker";
 import axios from "axios";
 
 function HomePage() {
-  const [selectedDate, setselectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const [gameData, setGameData] = useState([]);
 
-  const getPosts = async (selectedDate) => {
-    let apiDate = new Date(selectedDate);
-    let date =
+  const fetchGameData = async (selectedDate) => {
+    const apiDate = new Date(selectedDate);
+    const formattedDate =
       apiDate.getFullYear() +
       "-" +
       ("0" + (apiDate.getMonth() + 1)).slice(-2) +
       "-" +
       ("0" + apiDate.getDate()).slice(-2);
-  
-    let season;
-    // NBA season generally starts in October (month 9) and ends in April of the next year
-    if (apiDate.getMonth() >= 9) {
-      // If the month is October (9) or later, the season starts in the current year and ends in the next year
-      season = `${apiDate.getFullYear()}-${apiDate.getFullYear() + 1}`;
-    } else {
-      // If the month is before October, the season started in the previous year and ends in the current year
-      season = `${apiDate.getFullYear() - 1}-${apiDate.getFullYear()}`;
-    }
-  
+
     const options = {
       method: "GET",
-      url: "games",
+      url: "https://api-basketball.p.rapidapi.com/games",
       params: {
-        season: season,
-        start_date: date,
-        end_date: date,
+        season: "2024-2025", // Update the season as needed
+        league: "12",        // Update the league as needed
+        date: formattedDate,
       },
       headers: {
-        Accept: "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Authorization": `5453c273-add7-4732-b45a-e5163250cfaa`,
+        "x-rapidapi-host": "api-basketball.p.rapidapi.com",
+        "x-rapidapi-key": "d319461f72msh8114849e8fc830ep1e2bd3jsn3384176a0ffc", // Replace with your API key
       },
     };
-  
-    await axios
-      .request(options)
-      .then(function (response) {
-        setGameData(response.data.data);
-      })
-      .catch(function (error) {
-        console.error(error);
-      });
+
+    try {
+      const response = await axios.request(options);
+      setGameData(response.data.response || []); // Adjust based on actual API response structure
+    } catch (error) {
+      console.error("Error fetching game data:", error);
+    }
   };
-  
 
   useEffect(() => {
-    getPosts(selectedDate);
+    fetchGameData(selectedDate);
   }, [selectedDate]);
 
   return (
@@ -62,18 +48,18 @@ function HomePage() {
       <CurrentDate date={selectedDate} />
       <DatePicker
         selected={selectedDate}
-        onChange={(selectedDate) => setselectedDate(selectedDate)}
+        onChange={(date) => setSelectedDate(date)}
       />
-      <div className="gameScoreConatiner">
-        <React.Fragment>
-          {gameData.map((game) => {
-            console.log(game);
-            let homeTeamScore = game.home_team_score;
-            let awayTeamScore = game.visitor_team_score;
-            let homeTeamName = game.home_team.full_name;
-            let awayTeamName = game.visitor_team.full_name;
+      <div className="gameScoreContainer">
+        {gameData.length > 0 ? (
+          gameData.map((game, index) => {
+            const homeTeamScore = game.scores.home.total || "N/A";
+            const awayTeamScore = game.scores.away.total || "N/A";
+            const homeTeamName = game.teams.home.name || "Home Team";
+            const awayTeamName = game.teams.away.name || "Away Team";
+
             return (
-              <div className="ScoreContainer">
+              <div key={index} className="ScoreContainer">
                 <TeamGameScoreCard
                   teamName={homeTeamName}
                   teamScore={homeTeamScore}
@@ -84,8 +70,10 @@ function HomePage() {
                 />
               </div>
             );
-          })}
-        </React.Fragment>
+          })
+        ) : (
+          <p>No games found for the selected date.</p>
+        )}
       </div>
     </div>
   );
