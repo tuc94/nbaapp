@@ -3,11 +3,9 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import HomePage from "../Containers/HomePage";
 import Standings from "../Containers/Standings";
 import PlayerSerach from "../Components/PlayerSearch/PlayerSearch";
-import PlayerStatPage from "../Components/PlayerStatPage/PlayerStatPage";
 import "./NavBar.css";
 
 export default function NavBar(listofOptions) {
-  let props = listofOptions;
   return (
     <Router>
       <div>

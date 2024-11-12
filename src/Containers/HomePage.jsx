@@ -10,6 +10,15 @@ function HomePage() {
 
   const fetchGameData = async (selectedDate) => {
     const apiDate = new Date(selectedDate);
+
+    // Determine the NBA season based on the date
+    const year = apiDate.getFullYear();
+    const month = apiDate.getMonth(); // January is 0, December is 11
+    const season =
+      month >= 6 // Month is zero-indexed; 6 corresponds to July
+        ? `${year}-${year + 1}`
+        : `${year - 1}-${year}`;
+
     const formattedDate =
       apiDate.getFullYear() +
       "-" +
@@ -21,14 +30,14 @@ function HomePage() {
       method: "GET",
       url: "https://api-basketball.p.rapidapi.com/games",
       params: {
-        season: "2024-2025", // Update the season as needed
-        league: "12",        // Update the league as needed
+        season: season, // Use the calculated season
+        league: "12",
         date: formattedDate,
-        timezone: "America/New_York"
+        timezone: "America/New_York",
       },
       headers: {
         "x-rapidapi-host": "api-basketball.p.rapidapi.com",
-        "x-rapidapi-key": "d319461f72msh8114849e8fc830ep1e2bd3jsn3384176a0ffc", // Replace with your API key
+        "x-rapidapi-key": process.env.REACT_APP_RAPIDAPI_KEY, // Access the API key from env
       },
     };
 
