@@ -32,7 +32,7 @@ const generateSeasonData = (years = 5, includeNextSeason = false) => {
 };
 
 const Standings = () => {
-  const [season, setSeason] = useState("2020-2021");
+  const [season, setSeason] = useState("2023-2024");
   const [standingData, setStandingData] = useState([]);
   const [toggleSelection, setToggleSelection] = useState("Confrence");
 
