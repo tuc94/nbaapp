@@ -3,6 +3,7 @@ import CurrentDate from "../Components/CurrentDate";
 import TeamGameScoreCard from "../Components/TeamGameScoreCard/TeamGameScoreCard";
 import DatePicker from "react-datepicker";
 import axios from "axios";
+import "react-datepicker/dist/react-datepicker.css";
 
 function HomePage() {
   const [selectedDate, setSelectedDate] = useState(new Date());

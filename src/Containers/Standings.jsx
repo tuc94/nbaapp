@@ -5,70 +5,86 @@ import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import "./Standings.css";
 import SelectMe from "../Components/Select/SelectMe";
-let seasonData = require("../data/currentseasonData.json");
-seasonData = seasonData.data.reverse();
+import groupData from "../data/groupNames.json"; // Import the JSON data
 
-function Standings() {
+const generateSeasonData = (years = 5, includeNextSeason = false) => {
+  const currentYear = new Date().getFullYear();
+  const currentMonth = new Date().getMonth();
+  const seasons = Array.from({ length: years }, (_, i) => {
+    const startYear = currentYear - i;
+    const endYear = startYear + 1;
+    return {
+      title: `${startYear}-${endYear.toString().slice(-2)}`,
+      value: `${startYear}-${endYear}`,
+    };
+  });
+
+  if (includeNextSeason && currentMonth >= 8) {
+    const nextSeasonStart = currentYear + 1;
+    const nextSeasonEnd = nextSeasonStart + 1;
+    seasons.unshift({
+      title: `${nextSeasonStart}-${nextSeasonEnd.toString().slice(-2)}`,
+      value: `${nextSeasonStart}-${nextSeasonEnd}`,
+    });
+  }
+
+  return seasons.reverse(); // Reverse if needed
+};
+
+const Standings = () => {
   const [season, setSeason] = useState("2020-2021");
   const [standingData, setStandingData] = useState([]);
   const [toggleSelection, setToggleSelection] = useState("Confrence");
 
-  const getPosts = async () => {
-    //This doesn't work but want it as a frame of refrence
-    const options = {
-      method: "GET",
-      url: "https://api-basketball.p.rapidapi.com/standings",
-      params: { league: "12", season: season },
-      headers: {
-        "x-rapidapi-key": "d319461f72msh8114849e8fc830ep1e2bd3jsn3384176a0ffc",
-        "x-rapidapi-host": "api-basketball.p.rapidapi.com",
-      },
+  useEffect(() => {
+    const fetchData = async () => {
+      const options = {
+        method: "GET",
+        url: "https://api-basketball.p.rapidapi.com/standings",
+        params: { league: "12", season: season },
+        headers: {
+          "x-rapidapi-host": "api-basketball.p.rapidapi.com",
+          "x-rapidapi-key": process.env.REACT_APP_RAPIDAPI_KEY,
+        },
+      };
+
+      try {
+        const response = await axios.request(options);
+        setStandingData(response.data.response[0] || []);
+      } catch (error) {
+        console.error("Failed to fetch standings data:", error);
+      }
     };
 
-    axios
-      .request(options)
-      .then(function (response) {
-        setStandingData(response.data.response[0]);
-      })
-      .catch(function (error) {
-        console.error(error);
-      });
-  };
-
-  useEffect(() => {
-    getPosts();
+    fetchData();
   }, [season]);
 
-  const [alignment, setAlignment] = React.useState("left");
+  const groupedStandings = React.useMemo(() => {
+    return groupData.groups.reduce((acc, group) => {
+      const groupName = group.name;
+      acc[groupName] = standingData.filter(
+        (standing) => standing.group && standing.group.name === groupName
+      );
+      return acc;
+    }, {});
+  }, [standingData]);
+
+  const {
+    "Western Conference": west = [],
+    "Eastern Conference": east = [],
+    Atlantic: atlantic = [],
+    Southeast: southEast = [],
+    Central: central = [],
+    Northwest: northWest = [],
+    Pacific: pacfific = [],
+    Southwest: southWest = [],
+  } = groupedStandings;
 
   const handleAlignment = (e, newToggle) => {
-    setToggleSelection(newToggle);
+    if (newToggle !== null) {
+      setToggleSelection(newToggle);
+    }
   };
-
-  const west = standingData.filter((standing) => {
-    return standing.group.name === "Western Conference";
-  });
-  const east = standingData.filter((standing) => {
-    return standing.group.name === "Eastern Conference";
-  });
-  const atlantic = standingData.filter((standing) => {
-    return standing.group.name === "Atlantic";
-  });
-  const southEast = standingData.filter((standing) => {
-    return standing.group.name === "Southeast";
-  });
-  const central = standingData.filter((standing) => {
-    return standing.group.name === "Central";
-  });
-  const northWest = standingData.filter((standing) => {
-    return standing.group.name === "Northwest";
-  });
-  const pacfific = standingData.filter((standing) => {
-    return standing.group.name === "Pacific";
-  });
-  const southWest = standingData.filter((standing) => {
-    return standing.group.name === "Southwest";
-  });
 
   return (
     <div>
@@ -83,12 +99,12 @@ function Standings() {
           <div className="toggleButtonFont">Confrence</div>
         </ToggleButton>
         <ToggleButton value="Divsions" aria-label="centered">
-          <div className="toggleButtonFont">Divisions </div>
+          <div className="toggleButtonFont">Divisions</div>
         </ToggleButton>
       </ToggleButtonGroup>
       <div>
         <SelectMe
-          data={seasonData}
+          data={generateSeasonData()}
           label={"Season"}
           state={season}
           setState={setSeason}
@@ -97,8 +113,8 @@ function Standings() {
       </div>
       {toggleSelection === "Confrence" ? (
         <div className="confrenceStandingsContainer">
-          <StandingsTable standings={west} />
           <StandingsTable standings={east} />
+          <StandingsTable standings={west} />
         </div>
       ) : (
         <div>
@@ -114,6 +130,6 @@ function Standings() {
       )}
     </div>
   );
-}
+};
 
 export default Standings;

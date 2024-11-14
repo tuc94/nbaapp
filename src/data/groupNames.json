@@ -1,0 +1,37 @@
+{
+    "groups": [
+      {
+        "name": "Western Conference",
+        "data": []
+      },
+      {
+        "name": "Eastern Conference",
+        "data": []
+      },
+      {
+        "name": "Atlantic",
+        "data": []
+      },
+      {
+        "name": "Southeast",
+        "data": []
+      },
+      {
+        "name": "Central",
+        "data": []
+      },
+      {
+        "name": "Northwest",
+        "data": []
+      },
+      {
+        "name": "Pacific",
+        "data": []
+      },
+      {
+        "name": "Southwest",
+        "data": []
+      }
+    ]
+  }
+  
