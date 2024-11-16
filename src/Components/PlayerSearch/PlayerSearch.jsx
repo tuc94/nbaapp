@@ -1,58 +1,54 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./PlayerSearch.css";
 import axios from "axios";
-import { Table } from "@material-ui/core";
-import Radio from "@material-ui/core/Radio";
-import Button from "@material-ui/core/Button";
-import Icon from "@material-ui/core/Icon";
+import { Table, TableHead, TableRow, TableCell, TableBody, Radio, Button } from "@material-ui/core";
 import PlayerStatPage from "../PlayerStatPage/PlayerStatPage";
-import SelectMe from "../Select/SelectMe";
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
-import "./PlayerSearch.css";
-let seasonData = require("../../data/seasonData.json");
-seasonData = seasonData.data.reverse();
+
+const seasonData = require("../../data/seasonData.json").data.reverse();
 
 export default function PlayerSearch() {
   const [playerSearch, setPlayerSearch] = useState("");
   const [playerList, setPlayerList] = useState([]);
-  const [searchList, setSearchList] = useState([]);
   const [selectedPlayer, setSelectedPlayer] = useState("");
   const [showPlayerStats, setShowPlayerStats] = useState(false);
-  const [hidePlayerSearch, setHidePlayerSearch] = useState(false);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const getPlayer = async () => {
-    //This doesn't work but want it as a frame of refrence
-    const options = {
-      method: "GET",
-      url: "/players",
-      params: { search: playerSearch },
-      headers: {
-        Accept: "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-    };
+    if (!playerSearch.trim()) {
+      setError("Please enter a player name to search.");
+      return;
+    }
 
-    axios
-      .request(options)
-      .then(function (response) {
-        if (response.data.data.length === 0) {
-          setHidePlayerSearch(true);
-        } else if (response.data.data.length !== 0) {
-          setHidePlayerSearch(false);
-          setPlayerList(response.data.data);
-        }
-      })
-      .catch(function (error) {
-        console.error(error);
+    setLoading(true);
+    setError(""); // Reset error state
+    try {
+      const response = await axios.get("https://api.balldontlie.io/v1/players", {
+        params: { search: playerSearch },
+        headers: {
+          Accept: "application/json",
+          Authorization: "5453c273-add7-4732-b45a-e5163250cfaa"
+        },
       });
+
+      if (response.data.data.length === 0) {
+        setError("No players found. Please search for another player.");
+        setPlayerList([]);
+      } else {
+        setPlayerList(response.data.data);
+      }
+    } catch (err) {
+      setError("An error occurred while fetching player data. Please try again.");
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  useEffect(() => {
-    if (playerSearch === "") {
-    } else {
-      getPlayer();
-    }
-  }, [searchList]);
+  const handleSearch = () => {
+    getPlayer(); // Trigger the API call only when the search button is clicked
+  };
 
   const handleChange = (event) => {
     setSelectedPlayer(event.target.value);
@@ -62,64 +58,62 @@ export default function PlayerSearch() {
     setShowPlayerStats(true);
   };
 
+
   return (
     <div>
       {showPlayerStats ? (
-        <div>
-          <PlayerStatPage
-            playerId={selectedPlayer}
-            state={showPlayerStats}
-            setState={setShowPlayerStats}
-          />
-        </div>
+        <PlayerStatPage
+          playerId={selectedPlayer}
+          state={showPlayerStats}
+          setState={setShowPlayerStats}
+        />
       ) : (
         <div>
           <input
             type="text"
-            id="player name"
             className="bar"
             value={playerSearch}
             placeholder="NBA Player"
             onChange={(e) => setPlayerSearch(e.target.value)}
           />
-
           <Button
             variant="contained"
             color="primary"
-            onClick={(e) => setSearchList(playerSearch)}
+            onClick={handleSearch} // Calls the function when button is clicked
             className="searchButton"
           >
             <SearchOutlinedIcon />
           </Button>
-          {hidePlayerSearch ? (
-            <div className="errorMessage "> Search Another Player </div>
-          ) : (
+          {loading && <div>Loading...</div>}
+          {error && <div className="errorMessage">{error}</div>}
+          {!error && playerList.length > 0 && (
             <Table>
-              <tr>
-                <th></th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Team Name</th>
-              </tr>
-
-              {playerList.map((player) => {
-                return (
-                  <tr>
-                    <td>
+              <TableHead>
+                <TableRow>
+                  <TableCell></TableCell>
+                  <TableCell>First Name</TableCell>
+                  <TableCell>Last Name</TableCell>
+                  <TableCell>Team Name</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {playerList.map((player) => (
+                  <TableRow key={player.id}>
+                    <TableCell>
                       <Radio
-                        checked={selectedPlayer == player.id}
+                        checked={selectedPlayer === String(player.id)}
                         onChange={handleChange}
-                        value={player.id}
+                        value={String(player.id)}
                         name="radio-button-demo"
-                        inputProps={{ "aria-label": "A" }}
+                        inputProps={{ "aria-label": player.id }}
                       />
-                    </td>
-                    <td>{player.first_name} </td>
-                    <td>{player.last_name} </td>
-                    <td>{player.team.full_name} </td>
-                  </tr>
-                );
-              })}
+                    </TableCell>
+                    <TableCell>{player.first_name}</TableCell>
+                    <TableCell>{player.last_name}</TableCell>
+                    <TableCell>{player.team.full_name}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
             </Table>
           )}
           <div className="selectButtonConatiner">
@@ -128,8 +122,9 @@ export default function PlayerSearch() {
               color="primary"
               onClick={switchToPlayerScreen}
               className="selectButton"
+              disabled={!selectedPlayer}
             >
-              <div className="selectText"> Select </div>
+              <div className="selectText">Select</div>
             </Button>
           </div>
         </div>
