@@ -20,7 +20,7 @@ export default function PlayerStatPage({ playerId, state, setState }) {
       headers: {
         Accept: "application/json",
         "Access-Control-Allow-Origin": "*",
-        Authorization: "5453c273-add7-4732-b45a-e5163250cfaa"
+        Authorization: process.env.REACT_APP_BALLDONTLIE
       },
     };
 

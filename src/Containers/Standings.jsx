@@ -86,6 +86,13 @@ const Standings = () => {
     }
   };
 
+  const renderStandingsTable = (standings, conferenceName) => {
+    if (!standings || standings.length === 0) {
+      return <p>{`${conferenceName} standings are not available.`}</p>;
+    }
+    return <StandingsTable standings={standings} />;
+  };
+
   return (
     <div>
       <ToggleButtonGroup
@@ -113,19 +120,19 @@ const Standings = () => {
       </div>
       {toggleSelection === "Confrence" ? (
         <div className="confrenceStandingsContainer">
-          <StandingsTable standings={east} />
-          <StandingsTable standings={west} />
+          {renderStandingsTable(east, 'Eastern Conference')}
+          {renderStandingsTable(west, 'Western Conference')}
         </div>
       ) : (
         <div>
-          <p>Eastern Confrence</p>
-          <StandingsTable standings={atlantic} />
-          <StandingsTable standings={southEast} />
-          <StandingsTable standings={central} />
-          <p>Western Confrence</p>
-          <StandingsTable standings={northWest} />
-          <StandingsTable standings={pacfific} />
-          <StandingsTable standings={southWest} />
+          <p>Eastern Conference</p>
+          {renderStandingsTable(atlantic, 'Atlantic')}
+          {renderStandingsTable(southEast, 'Southeast')}
+          {renderStandingsTable(central, 'Central')}
+          <p>Western Conference</p>
+          {renderStandingsTable(northWest, 'Northwest')}
+          {renderStandingsTable(pacfific, 'Pacific')}
+          {renderStandingsTable(southWest, 'Southwest')}
         </div>
       )}
     </div>
