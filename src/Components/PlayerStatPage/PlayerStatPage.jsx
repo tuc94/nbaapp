@@ -16,10 +16,9 @@ export default function PlayerStatPage({ playerId, state, setState }) {
     const options = {
       method: "GET",
       url: "https://api.balldontlie.io/v1/season_averages",
-      params: { season, "player_ids[]": playerId },
+      params: { season, "player_id": playerId },
       headers: {
         Accept: "application/json",
-        "Access-Control-Allow-Origin": "*",
         Authorization: process.env.REACT_APP_BALLDONTLIE
       },
     };
