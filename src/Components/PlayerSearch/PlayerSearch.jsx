@@ -87,7 +87,7 @@ export default function PlayerSearch() {
           {loading && <div>Loading...</div>}
           {error && <div className="errorMessage">{error}</div>}
           {!error && playerList.length > 0 && (
-            <Table>
+            <Table className="playerSearchTable">
               <TableHead>
                 <TableRow>
                   <TableCell></TableCell>
